@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+form input,
+form textarea,
+form select {
+  border-width: 2px !important; /* Force your style to apply */
+  border-color: #1e90ff !important; /* Use dark blue color */
+}

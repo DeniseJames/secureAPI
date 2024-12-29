@@ -11,17 +11,26 @@
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^6.5.5",
+    "@types/react-router-dom": "^5.3.3",
     "aws-amplify": "^6.6.6",
     "bootstrap": "^5.3.3",
+    "file-saver": "^2.0.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bootstrap": "^2.10.7",
+    "react-dom": "^18.2.0",
+    "react-qr-code": "^2.0.15",
+    "react-router-bootstrap": "^0.26.3",
+    "react-router-dom": "^7.1.0",
+    "vcards-js": "^2.10.0"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.11.0",
     "@aws-amplify/backend-cli": "^1.2.9",
     "@types/aws-lambda": "^8.10.146",
+    "@types/file-saver": "^2.0.7",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/react-router-bootstrap": "^0.26.6",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",

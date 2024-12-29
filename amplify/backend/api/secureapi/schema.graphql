@@ -1,0 +1,280 @@
+type Contact {
+	email: String!
+	name: String
+	comment: String
+}
+
+type ContactConnection {
+	items: [Contact]
+	nextToken: String
+}
+
+input CreateContactInput {
+	email: String!
+	name: String
+	comment: String
+}
+
+input CreateCustomerDiscoveryInput {
+	email: String!
+	city: String!
+	state: String!
+	storeName: String
+	role: String
+	additionalFeedback: String
+	monthlyLossFromTheft: Float
+	merchandiseTheftCategories: [String]
+	monthlySecuritySpend: Float
+	securityImprovements: String
+	roleChallenges: String
+	expensiveTheftTypes: [String]
+	theftPreventionPlans: [String]
+	theftPreventionTools: [String]
+	theftPatterns: String
+	staffTraining: [String]
+	faceRecognitionEnhancement: String
+}
+
+input CreateCustomerDiscoveryModelInput {
+	email: String!
+	city: String!
+	state: String!
+	storeName: String
+	role: String
+	additionalFeedback: String
+	monthlyLossFromTheft: Float
+	merchandiseTheftCategories: [String]
+	monthlySecuritySpend: Float
+	securityImprovements: String
+	roleChallenges: String
+	expensiveTheftTypes: [String]
+	theftPreventionPlans: [String]
+	theftPreventionTools: [String]
+	theftPatterns: String
+	staffTraining: [String]
+	faceRecognitionEnhancement: String
+}
+
+type CustomerDiscovery {
+	email: String!
+	additionalFeedback: String
+	storeName: String
+	role: String
+	city: String
+	state: String
+	monthlyLossFromTheft: Float
+	merchandiseTheftCategories: [String]
+	monthlySecuritySpend: Float
+	securityImprovements: String
+	roleChallenges: String
+	expensiveTheftTypes: [String]
+	theftPreventionPlans: [String]
+	theftPreventionTools: [String]
+	theftPatterns: String
+	staffTraining: [String]
+	faceRecognitionEnhancement: String
+}
+
+type CustomerDiscoveryConnection {
+	items: [CustomerDiscovery]
+	nextToken: String
+}
+
+type CustomerDiscoveryModel {
+	email: String!
+	city: String!
+	state: String!
+	storeName: String
+	role: String
+	additionalFeedback: String
+	monthlyLossFromTheft: Float
+	merchandiseTheftCategories: [String]
+	monthlySecuritySpend: Float
+	securityImprovements: String
+	roleChallenges: String
+	expensiveTheftTypes: [String]
+	theftPreventionPlans: [String]
+	theftPreventionTools: [String]
+	theftPatterns: String
+	staffTraining: [String]
+	faceRecognitionEnhancement: String
+}
+
+type CustomerDiscoveryModelConnection {
+	items: [CustomerDiscoveryModel]
+	nextToken: String
+}
+
+input DeleteContactInput {
+	email: String!
+}
+
+input DeleteCustomerDiscoveryInput {
+	email: String!
+}
+
+input DeleteCustomerDiscoveryModelInput {
+	email: String!
+}
+
+input ModelSizeInput {
+	between: [Int]
+	eq: Int
+	ge: Int
+	gt: Int
+	le: Int
+	lt: Int
+	ne: Int
+}
+
+input TableBooleanFilterInput {
+	ne: Boolean
+	eq: Boolean
+	attributeExists: Boolean
+}
+
+input TableCustomerDiscoveryFilterInput {
+	email: TableStringFilterInput
+	additionalFeedback: TableStringFilterInput
+	storeName: TableStringFilterInput
+	role: TableStringFilterInput
+	city: TableStringFilterInput
+	state: TableStringFilterInput
+	monthlyLossFromTheft: TableJSONFilterInput
+	merchandiseTheftCategories: TableStringFilterInput
+	monthlySecuritySpend: TableJSONFilterInput
+	securityImprovements: TableStringFilterInput
+	roleChallenges: TableStringFilterInput
+	expensiveTheftTypes: TableStringFilterInput
+	theftPreventionPlans: TableStringFilterInput
+	theftPreventionTools: TableStringFilterInput
+	theftPatterns: TableStringFilterInput
+	staffTraining: TableStringFilterInput
+	faceRecognitionEnhancement: TableStringFilterInput
+}
+
+input TableCustomerDiscoveryModelFilterInput {
+	email: TableStringFilterInput
+	additionalFeedback: TableStringFilterInput
+	storeName: TableStringFilterInput
+	role: TableStringFilterInput
+	city: TableStringFilterInput
+	state: TableStringFilterInput
+	monthlyLossFromTheft: TableJSONFilterInput
+	merchandiseTheftCategories: TableStringFilterInput
+	monthlySecuritySpend: TableJSONFilterInput
+	securityImprovements: TableStringFilterInput
+	roleChallenges: TableStringFilterInput
+	expensiveTheftTypes: TableStringFilterInput
+	theftPreventionPlans: TableStringFilterInput
+	theftPreventionTools: TableStringFilterInput
+	theftPatterns: TableStringFilterInput
+	staffTraining: TableStringFilterInput
+	faceRecognitionEnhancement: TableStringFilterInput
+}
+
+input TableJSONFilterInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	between: [Float]
+	attributeExists: Boolean
+}
+
+input TableStringFilterInput {
+	attributeExists: Boolean
+	beginsWith: String
+	between: [String]
+	contains: String
+	eq: String
+	ge: String
+	gt: String
+	le: String
+	lt: String
+	ne: String
+	notContains: String
+	size: ModelSizeInput
+}
+
+input UpdateContactInput {
+	email: String!
+	name: String
+	comment: String
+}
+
+input UpdateCustomerDiscoveryInput {
+	email: String!
+	additionalFeedback: String
+	storeName: String
+	role: String
+	city: String
+	state: String
+	monthlyLossFromTheft: Float
+	merchandiseTheftCategories: [String]
+	monthlySecuritySpend: Float
+	securityImprovements: String
+	roleChallenges: String
+	expensiveTheftTypes: [String]
+	theftPreventionPlans: [String]
+	theftPreventionTools: [String]
+	theftPatterns: String
+	staffTraining: [String]
+	faceRecognitionEnhancement: String
+}
+
+input UpdateCustomerDiscoveryModelInput {
+	additionalFeedback: String
+	additionalSupport: String
+	balance: String
+	balanceSecurityWithExperience: String
+	city: String!
+	collaborationsWithLawEnforcement: String
+	email: String!
+	expensiveTheftTypes: [String]
+	faceRecognitionEnhancement: String
+	incidentHandling: String
+	merchandiseTheftCategories: [String]
+	monthlyLossFromTheft: Float
+	monthlySecuritySpend: Float
+	role: String
+	roleChallenges: String
+	securityImprovements: String
+	staffTraining: String
+	state: String
+	storeName: String
+	strategyReviewFrequency: String
+	theftImpact: String
+	theftPatterns: String
+	theftPreventionEffectiveness: String
+	theftPreventionPlans: [String]
+	theftPreventionTools: [String]
+}
+
+type Mutation {
+	createCustomerDiscoveryModel(input: CreateCustomerDiscoveryModelInput!): CustomerDiscoveryModel
+	deleteCustomerDiscoveryModel(input: DeleteCustomerDiscoveryModelInput!): CustomerDiscoveryModel
+	updateCustomerDiscoveryModel(input: UpdateCustomerDiscoveryModelInput!): CustomerDiscoveryModel
+	createContact(input: CreateContactInput!): Contact
+	deleteContact(input: DeleteContactInput!): Contact
+	updateContact(input: UpdateContactInput!): Contact
+	createCustomerDiscovery(input: CreateCustomerDiscoveryInput!): CustomerDiscovery
+	updateCustomerDiscovery(input: UpdateCustomerDiscoveryInput!): CustomerDiscovery
+	deleteCustomerDiscovery(input: DeleteCustomerDiscoveryInput!): CustomerDiscovery
+}
+
+type Query {
+	getCustomerDiscoveryModel(city: String!, email: String!): CustomerDiscoveryModel
+	listCustomerDiscoveryModels(filter: TableCustomerDiscoveryModelFilterInput, limit: Int, nextToken: String): CustomerDiscoveryModelConnection
+	getContact(email: String!): Contact
+	listContacts(limit: Int, nextToken: String): ContactConnection
+	getCustomerDiscovery(email: String!): CustomerDiscovery
+	listCustomerDiscoveries(filter: TableCustomerDiscoveryFilterInput, limit: Int, nextToken: String): CustomerDiscoveryConnection
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}

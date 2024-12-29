@@ -1,31 +1,23 @@
 export const createCustomerDiscoveryModel = /* GraphQL */ `
   mutation CreateCustomerDiscoveryModel($input: CreateCustomerDiscoveryModelInput!) {
     createCustomerDiscoveryModel(input: $input) {
-      additionalFeedback
-      additionalSupport
-      balance
-      balanceSecurityWithExperience
-      city
-      collaborationsWithLawEnforcement
-      email
-      expensiveTheftTypes
-      faceRecognitionEnhancement
-      incidentHandling
-      merchandiseTheftCategories
-      monthlyLossFromTheft
-      monthlySecuritySpend
-      role
-      roleChallenges
-      securityImprovements
-      staffTraining
-      state
-      storeName
-      strategyReviewFrequency
-      theftImpact
-      theftPatterns
-      theftPreventionEffectiveness
-      theftPreventionPlans
-      theftPreventionTools
+          email
+          city
+          storeName
+          additionalFeedback          
+          role          
+          state
+          monthlyLossFromTheft
+          merchandiseTheftCategories
+          monthlySecuritySpend
+          securityImprovements
+          roleChallenges
+          expensiveTheftTypes
+          theftPreventionPlans
+          theftPreventionTools
+          theftPatterns
+          staffTraining
+          faceRecognitionEnhancement
     }
   }
 `;
@@ -33,31 +25,7 @@ export const createCustomerDiscoveryModel = /* GraphQL */ `
 export const deleteCustomerDiscoveryModel = /* GraphQL */ `
   mutation DeleteCustomerDiscoveryModel($input: DeleteCustomerDiscoveryModelInput!) {
     deleteCustomerDiscoveryModel(input: $input) {
-      additionalFeedback
-      additionalSupport
-      balance
-      balanceSecurityWithExperience
-      city
-      collaborationsWithLawEnforcement
       email
-      expensiveTheftTypes
-      faceRecognitionEnhancement
-      incidentHandling
-      merchandiseTheftCategories
-      monthlyLossFromTheft
-      monthlySecuritySpend
-      role
-      roleChallenges
-      securityImprovements
-      staffTraining
-      state
-      storeName
-      strategyReviewFrequency
-      theftImpact
-      theftPatterns
-      theftPreventionEffectiveness
-      theftPreventionPlans
-      theftPreventionTools
     }
   }
 `;
@@ -65,18 +33,13 @@ export const deleteCustomerDiscoveryModel = /* GraphQL */ `
 export const updateCustomerDiscoveryModel = /* GraphQL */ `
   mutation UpdateCustomerDiscoveryModel($input: UpdateCustomerDiscoveryModelInput!) {
     updateCustomerDiscoveryModel(input: $input) {
-      additionalFeedback
-      additionalSupport
-      balance
-      balanceSecurityWithExperience
-      city
-      collaborationsWithLawEnforcement
       email
+      monthlyLossFromTheft
+      additionalFeedback
+      city
       expensiveTheftTypes
       faceRecognitionEnhancement
-      incidentHandling
       merchandiseTheftCategories
-      monthlyLossFromTheft
       monthlySecuritySpend
       role
       roleChallenges
@@ -84,12 +47,93 @@ export const updateCustomerDiscoveryModel = /* GraphQL */ `
       staffTraining
       state
       storeName
-      strategyReviewFrequency
-      theftImpact
       theftPatterns
-      theftPreventionEffectiveness
       theftPreventionPlans
       theftPreventionTools
+      }
+  }
+`;
+
+export const createContact = /* GraphQL */ `
+  mutation CreateContact($input: CreateContactInput!) {
+    createContact(input: $input) {
+      email
+      name
+      comment
+    }
+  }
+`;
+
+export const deleteContact = /* GraphQL */ `
+  mutation DeleteContact($input: DeleteContactInput!) {
+    deleteContact(input: $input) {
+      email
+    }
+  }
+`;
+
+export const updateContact = /* GraphQL */ `
+  mutation UpdateContact($input: UpdateContactInput!) {
+    updateContact(input: $input) {
+      email
+      name
+      comment
+    }
+  }
+`;
+
+export const createCustomerDiscovery = /* GraphQL */ `
+  mutation CreateCustomerDiscovery($input: CreateCustomerDiscoveryInput!) {
+    createCustomerDiscovery(input: $input) {
+      email
+      additionalFeedback
+      storeName
+      role
+      city
+      state
+      monthlyLossFromTheft
+      merchandiseTheftCategories
+      monthlySecuritySpend
+      securityImprovements
+      roleChallenges
+      expensiveTheftTypes
+      theftPreventionPlans
+      theftPreventionTools
+      theftPatterns
+      staffTraining
+      faceRecognitionEnhancement
+    }
+  }
+`;
+
+export const updateCustomerDiscovery = /* GraphQL */ `
+  mutation UpdateCustomerDiscovery($input: UpdateCustomerDiscoveryInput!) {
+    updateCustomerDiscovery(input: $input) {
+      email
+      additionalFeedback
+      storeName
+      role
+      city
+      state
+      monthlyLossFromTheft
+      merchandiseTheftCategories
+      monthlySecuritySpend
+      securityImprovements
+      roleChallenges
+      expensiveTheftTypes
+      theftPreventionPlans
+      theftPreventionTools
+      theftPatterns
+      staffTraining
+      faceRecognitionEnhancement
+    }
+  }
+`;
+
+export const deleteCustomerDiscovery = /* GraphQL */ `
+  mutation DeleteCustomerDiscovery($input: DeleteCustomerDiscoveryInput!) {
+    deleteCustomerDiscovery(input: $input) {
+      email
     }
   }
 `;

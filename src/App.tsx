@@ -1,40 +1,44 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { Suspense } from 'react';
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import NavbarComponent from '../src/components/NavBar/NavBarComponent';
+import './App.css'; // Import your CSS file
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { Route, Routes } from 'react-router-dom';
 
-const client = generateClient<Schema>();
+// Lazy load the components
+const HomeComponent = React.lazy(() => import('./components/Home/HomeComponent'));
+const MachineLearningComponent = React.lazy(() => import('../src/components/MachineLearning/MachineLearningComponent'));
+const WebDesignComponent = React.lazy(() => import('../src/components/WebDesign/WebDesignComponent'));
+const TrainingComponent = React.lazy(() => import('../src/components/Training/TrainingComponent'));
+const LoginComponent = React.lazy(() => import('./components/LogIn/LoginComponent'));
+const SearchResults = React.lazy(() => import('../src/components/SearchResults/SearchResultsComponent'));
+const ContactComponent = React.lazy(() => import('../src/components/Contact/ContactComponent'));
+const VCardPage = React.lazy(() => import('../src/components/vCard/vCardPage')); // Import the VCardPage component
+const CustomerDiscoverySurvey = React.lazy(() => import('../src/components/CustomerDiscovery/CustomerDiscoveryComponent'));
 
 function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
-
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
-    </main>
+    <Authenticator.Provider>
+
+        <NavbarComponent />
+        <div className="container-fluid"> {/* Use Bootstrap container */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<HomeComponent />} />
+              <Route path="/login" element={<LoginComponent />} />
+              <Route path="/machine-learning" element={<MachineLearningComponent />} />
+              <Route path="/web-design" element={<WebDesignComponent />} />
+              <Route path="/training" element={<TrainingComponent />} />
+              <Route path="/search" element={<SearchResults />} />
+              <Route path="/contact" element={<ContactComponent />} />
+              <Route path="/vcard" element={<VCardPage />} /> {/* Add the route for VCardPage */}
+              <Route path="/cd" element={<CustomerDiscoverySurvey/>} />
+            </Routes>
+          </Suspense>
+        </div>
+  
+    </Authenticator.Provider>
   );
 }
 

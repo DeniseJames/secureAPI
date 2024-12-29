@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { generateClient } from "aws-amplify/api";
-
 import {createCustomerDiscoveryModel} from "../../graphql/mutations";
 
 const client = generateClient(); // AppSync client for Gen2
@@ -8,57 +7,41 @@ const CustomerDiscoveryComponent: React.FC = () => {
   interface FormState {
     email: string;
     additionalFeedback: string;
-    balance: string;
     storeName: string;
     role: string;
     city: string;
     state: string;
-    monthlyLossFromTheft: string;
-    merchandiseTheftCategories: string[]; // Array of strings for checkbox selections
-    monthlySecuritySpend: string;
+    monthlyLossFromTheft: number;
+    merchandiseTheftCategories: string[];
+    monthlySecuritySpend: number;
     securityImprovements: string;
     roleChallenges: string;
-    expensiveTheftTypes: string[]; // Array of strings for checkbox selections
-    theftPreventionPlans: string[]; // Array of strings for checkbox selections
-    theftPreventionTools: string[]; // Array of strings for checkbox selections
-    theftPreventionEffectiveness: string;
+    expensiveTheftTypes: string[];
+    theftPreventionPlans: string[];
+    theftPreventionTools: string[];
     theftPatterns: string;
-    staffTraining: string;
-    strategyReviewFrequency: string;
-    incidentHandling: string;
-    theftImpact: string;
-    additionalSupport: string;
-    balanceSecurityWithExperience: string;
-    collaborationsWithLawEnforcement: string;
+    staffTraining: string[];
     faceRecognitionEnhancement: string;
   }
   
   const [formState, setFormState] = useState<FormState>({
     email: "",
+    monthlyLossFromTheft: 0,
     additionalFeedback: "",
-    balance: "",
-    storeName: "",
-    role: "",
     city: "",
-    state: "",
-    theftPreventionPlans: [],
-    monthlyLossFromTheft: "",
-    merchandiseTheftCategories: [],
-    monthlySecuritySpend: "",
-    securityImprovements: "",
-    roleChallenges: "",
-    expensiveTheftTypes: [], // Initialized as an empty array
-    theftPreventionTools: [], // Initialized as an empty array
-    theftPreventionEffectiveness: "",
-    theftPatterns: "",
-    staffTraining: "",
-    strategyReviewFrequency: "",
-    incidentHandling: "",
-    theftImpact: "",
-    additionalSupport: "",
-    balanceSecurityWithExperience: "",
-    collaborationsWithLawEnforcement: "",
+    expensiveTheftTypes: [],
     faceRecognitionEnhancement: "",
+    merchandiseTheftCategories: [],
+    monthlySecuritySpend: 0,
+    role: "",
+    roleChallenges: "",
+    securityImprovements: "",
+    staffTraining: [],
+    state: "",
+    storeName: "",
+    theftPatterns: "",
+    theftPreventionPlans: [],
+    theftPreventionTools: [],
   });
   
   
@@ -66,7 +49,7 @@ const CustomerDiscoveryComponent: React.FC = () => {
   const [loading] = useState(false);
   const [errorMessage] = useState("");
 
-  const setInput = (key: string, value: string | string[]) => {
+  const setInput = (key: string, value: string | string[] | number) => {
     setFormState((prevState) => ({ ...prevState, [key]: value }));
   };
   
@@ -77,35 +60,29 @@ const CustomerDiscoveryComponent: React.FC = () => {
     try {
       const input = {
         email: formState.email,
-        additionalFeedback: formState.additionalFeedback,
-        balance: formState.balance,
-        storeName: formState.storeName,
-        role: formState.role,
-        city: formState.city,
-        state: formState.state,
-        monthlyLossFromTheft: formState.monthlyLossFromTheft,
-        merchandiseTheftCategories: formState.merchandiseTheftCategories,
-        monthlySecuritySpend: formState.monthlySecuritySpend,
-        securityImprovements: formState.securityImprovements,
-        roleChallenges: formState.roleChallenges,
-        expensiveTheftTypes: formState.expensiveTheftTypes,
-        theftPreventionPlans: formState.theftPreventionPlans,
-        theftPreventionTools: formState.theftPreventionTools,
-        theftPreventionEffectiveness: formState.theftPreventionEffectiveness,
-        theftPatterns: formState.theftPatterns,
-        staffTraining: formState.staffTraining,
-        strategyReviewFrequency: formState.strategyReviewFrequency,
-        incidentHandling: formState.incidentHandling,
-        theftImpact: formState.theftImpact,
-        additionalSupport: formState.additionalSupport,
-        balanceSecurityWithExperience: formState.balanceSecurityWithExperience,
-        collaborationsWithLawEnforcement: formState.collaborationsWithLawEnforcement,
-        faceRecognitionEnhancement: formState.faceRecognitionEnhancement,
+      additionalFeedback: formState.additionalFeedback,
+      storeName: formState.storeName,
+      role: formState.role,
+      city: formState.city,
+      state: formState.state,
+      monthlyLossFromTheft: formState.monthlyLossFromTheft, // No parsing needed
+      merchandiseTheftCategories: formState.merchandiseTheftCategories,
+      monthlySecuritySpend: formState.monthlySecuritySpend, // No parsing needed
+      securityImprovements: formState.securityImprovements,
+      roleChallenges: formState.roleChallenges,
+      expensiveTheftTypes: formState.expensiveTheftTypes,
+      theftPreventionPlans: formState.theftPreventionPlans,
+      theftPreventionTools: formState.theftPreventionTools,
+      theftPatterns: formState.theftPatterns,
+      staffTraining: formState.staffTraining,
+      faceRecognitionEnhancement: formState.faceRecognitionEnhancement
+
       };
     
       console.log("Submitting input:", JSON.stringify(input, null, 2));
 
-      // console.log("Submitting input:", input);
+      console.log("Type of monthlyLossFromTheft:", typeof input.monthlyLossFromTheft);
+      console.log("Type of monthlySecuritySpend:", typeof input.monthlySecuritySpend);
 
       const result = await client.graphql({
         query: createCustomerDiscoveryModel  ,
@@ -118,28 +95,20 @@ const CustomerDiscoveryComponent: React.FC = () => {
       setFormState({
         email: "",
         additionalFeedback: "",
-        balance: "",
         theftPreventionPlans: [],
         storeName: "",
         role: "",
         city: "",
         state: "",
-        monthlyLossFromTheft: "",
+        monthlyLossFromTheft: 0,
         merchandiseTheftCategories: [],
-        monthlySecuritySpend: "",
+        monthlySecuritySpend: 0,
         securityImprovements: "",
         roleChallenges: "",
         expensiveTheftTypes: [], // Already an array
         theftPreventionTools: [],
-        theftPreventionEffectiveness: "",
         theftPatterns: "",
-        staffTraining: "",
-        strategyReviewFrequency: "",
-        incidentHandling: "",
-        theftImpact: "",
-        additionalSupport: "",
-        balanceSecurityWithExperience: "",
-        collaborationsWithLawEnforcement: "",
+        staffTraining: [],
         faceRecognitionEnhancement: "",
       });
       
@@ -155,6 +124,7 @@ const CustomerDiscoveryComponent: React.FC = () => {
     }
   };
 
+
   return (
     <div className="container mt-5">
       <h2>Customer Discovery for Retail or Security Managers</h2>
@@ -163,8 +133,8 @@ const CustomerDiscoveryComponent: React.FC = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-          <div className="mb-3">
-          <label htmlFor="email">Enter your email. Your email will not be given to others or otherwise misused. It is used as the primary key to anaylze responses</label>
+          <div className="mb-3 text-start">
+          <label htmlFor="email" className="form-label mt-3 mb-3">Enter your email. Your email will not be given to others or otherwise misused. It is used as the primary key to anaylze responses</label>
             <input
               id="email"
               type="email"
@@ -175,8 +145,8 @@ const CustomerDiscoveryComponent: React.FC = () => {
               required
             />
           </div>
-          <div className="mb-3">
-          <label htmlFor="role">What is your role and responsibility at your company?</label>
+          <div className="mb-3 text-start ">
+          <label htmlFor="role" className="form-label mt-3 mb-3">What is your role and responsibility at your company?</label>
              <input
     id="role"
       type="text"
@@ -187,8 +157,8 @@ const CustomerDiscoveryComponent: React.FC = () => {
     required
   />
 </div>
-          <div className="mb-3">
-  <label htmlFor="storeName">Name of the Store</label>
+          <div className="mb-3 text-start">
+  <label htmlFor="storeName" className="form-label mt-3 mb-3">Name of the Store</label>
   <input
     id="storeName"
     type="text"
@@ -202,8 +172,8 @@ const CustomerDiscoveryComponent: React.FC = () => {
 
 
 
-<div className="mb-3">
-  <label htmlFor="city">Retail Store Location</label>
+<div className="mb-3 text-start">
+  <label htmlFor="city" className="form-label mt-3 mb-3">Retail Store Location</label>
   <input
     id="city"
     type="text"
@@ -224,8 +194,8 @@ const CustomerDiscoveryComponent: React.FC = () => {
   />
 </div>
 
-<div className="mb-3">
-    <label>What expensive types of theft are most prevalent in your store?</label>
+<div className="mb-3 text-start">
+    <label className="form-label mt-3 mb-3">What expensive types of theft are most prevalent in your store?</label>
     <div className="form-check">
       <input
         id="shoplifting"
@@ -279,10 +249,29 @@ const CustomerDiscoveryComponent: React.FC = () => {
         Organized Retail Theft
       </label>
     </div>
+    <div className="form-check">
+            <input
+              id="othertheft"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Other Theft")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Other Theft"]
+                    : formState.staffTraining.filter((plan) => plan !== "Other Theft")
+                )
+              }
+            />
+            <label htmlFor="othertheft" className="form-check-label">
+              Other Theft
+            </label>
+          </div>
   </div>
 
-  <div className="mb-3">
-  <label>What theft prevention plans do you have in your store?</label>
+  <div className="mb-3 text-start">
+  <label className="form-label mt-3 mb-3">What theft prevention plans do you have in your store?</label>
   <div className="form-check">
     <input
       id="cctv"
@@ -378,21 +367,41 @@ const CustomerDiscoveryComponent: React.FC = () => {
       Loss Prevention Personnel
     </label>
   </div>
+  <div className="form-check">
+            <input
+              id="otherplans"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Other Plan(s)")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Other Plan(s)"]
+                    : formState.staffTraining.filter((plan) => plan !== "Other Plan(s)")
+                )
+              }
+            />
+            <label htmlFor="otherplans" className="form-check-label">
+              Other Plan(s)
+            </label>
+          </div>
 </div>
-<div className="mb-3">
-  <label htmlFor="monthlyLossFromTheft">How much do you think your store loses monthly from theft?</label>
+<div className="mb-3 text-start">
+  <label htmlFor="monthlyLossTheft" className="form-label mt-3 mb-3">How much do you think your store loses monthly from theft?</label>
   <input
-    id="monthlyLossFromTheft"
-    type="text"
-    value={formState.monthlyLossFromTheft}
-    onChange={(e) => setInput("monthlyLossFromTheft", e.target.value)}
-    placeholder="Enter estimated loss"
-    className="form-control"
-  />
+  id="monthlyLossTheft"
+  type="number"
+  value={formState.monthlyLossFromTheft}
+  onChange={(e) => setInput("monthlyLossFromTheft", e.target.value)}
+  placeholder="Enter estimated loss"
+  className="form-control"
+/>
+
 </div>
 
-<div className="mb-3">
-  <label>What merchandise categories experience the most theft?</label>
+<div className="mb-3 text-start">
+  <label className="form-label mt-3 mb-3">What merchandise categories experience the most theft?</label>
   <div className="form-check">
     <input
       id="apparel"
@@ -488,26 +497,45 @@ const CustomerDiscoveryComponent: React.FC = () => {
       Groceries
     </label>
   </div>
+   <div className="form-check">
+            <input
+              id="otherdep"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Other Department")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Other Department"]
+                    : formState.staffTraining.filter((plan) => plan !== "Other Department")
+                )
+              }
+            />
+            <label htmlFor="otherdep" className="form-check-label">
+              Other Department
+            </label>
+          </div>
 </div>
 
 
-<div className="mb-3">
-  <label htmlFor="monthlySecuritySpend">How much does your store spend on security each month?</label>
+<div className="mb-3 text-start">
+  <label htmlFor="monthlySecuritySpend" className="form-label mt-3 mb-3">How much does your store spend on security each month?</label>
   <input
     id="monthlySecuritySpend"
-    type="text"
+    type="number"
     value={formState.monthlySecuritySpend}
-    onChange={(e) => setInput("monthlySecuritySpend", e.target.value)}
+    onChange={(e) => setInput("monthlySecuritySpend", parseFloat(e.target.value))}
     placeholder="Enter monthly spend"
     className="form-control"
   />
 </div>
 
-<div className="mb-3">
-  <label htmlFor="securityImprovements">Is there anything you would do differently to improve your store's security?</label>
+<div className="mb-3 text-start">
+  <label htmlFor="securityImprovements" className="form-label mt-3 mb-3">Is there anything you would do differently to improve your store's security?</label>
   <textarea
     id="securityImprovements"
-    rows={3}
+    rows={5}
     value={formState.securityImprovements}
     onChange={(e) => setInput("securityImprovements", e.target.value)}
     placeholder="Enter ideas for improvement"
@@ -515,11 +543,110 @@ const CustomerDiscoveryComponent: React.FC = () => {
   />
 </div>
 
-<div className="mb-3">
-  <label htmlFor="roleChallenges">What are some challenges you face in your role?</label>
+<div className="mb-3 text-start">
+          <label className="form-label mt-3 mb-3">How do you train your staff to prevent and detect theft?</label>
+          <div className="form-check">
+            <input
+              id="greetCustomers"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Greet Customers")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Greet Customers"]
+                    : formState.staffTraining.filter((plan) => plan !== "Greet Customers")
+                )
+              }
+            />
+            <label htmlFor="greetCustomers" className="form-check-label">
+              Greet Customers
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              id="askToHelp"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Ask to Help Customers")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Ask to Help Customers"]
+                    : formState.staffTraining.filter((plan) => plan !== "Ask to Help Customers")
+                )
+              }
+            />
+            <label htmlFor="askToHelp" className="form-check-label">
+              Ask to Help Customers
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              id="staffWearingCameras"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Staff Wearing Cameras to Record Theft")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Staff Wearing Cameras to Record Theft"]
+                    : formState.staffTraining.filter((plan) => plan !== "Staff Wearing Cameras to Record Theft")
+                )
+              }
+            />
+            <label htmlFor="staffWearingCameras" className="form-check-label">
+              Staff Wearing Cameras to Record Theft
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              id="reportTheft"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Report Theft to Management")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Report Theft to Management"]
+                    : formState.staffTraining.filter((plan) => plan !== "Report Theft to Management")
+                )
+              }
+            />
+            <label htmlFor="reportTheft" className="form-check-label">
+              Report Theft to Management
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              id="other"
+              type="checkbox"
+              className="form-check-input"
+              checked={formState.staffTraining.includes("Other")}
+              onChange={(e) =>
+                setInput(
+                  "staffTraining",
+                  e.target.checked
+                    ? [...formState.staffTraining, "Other"]
+                    : formState.staffTraining.filter((plan) => plan !== "Other")
+                )
+              }
+            />
+            <label htmlFor="other" className="form-check-label">
+              Other
+            </label>
+          </div>
+        </div>
+
+<div className="mb-3 text-start">
+  <label htmlFor="roleChallenges" className="form-label mt-3 mb-3">What are some challenges you face in your role?</label>
   <textarea
     id="roleChallenges"
-    rows={3}
+    rows={5}
     value={formState.roleChallenges}
     onChange={(e) => setInput("roleChallenges", e.target.value)}
     placeholder="Enter challenges"
@@ -527,13 +654,11 @@ const CustomerDiscoveryComponent: React.FC = () => {
   />
 </div>
 
-
-
-<div className="mb-3">
-  <label htmlFor="theftPreventionTools">What technologies or tools are you currently using for theft prevention?</label>
+<div className="mb-3 text-start">
+  <label htmlFor="theftPreventionTools" className="form-label mt-3 mb-3">What technologies or tools are you currently using for theft prevention?</label>
   <textarea
     id="theftPreventionTools"
-    rows={3}
+    rows={5}
     value={formState.theftPreventionTools}
     onChange={(e) => setInput("theftPreventionTools", e.target.value)}
     placeholder="Enter technologies/tools used"
@@ -541,11 +666,11 @@ const CustomerDiscoveryComponent: React.FC = () => {
   />
 </div>
 
-<div className="mb-3">
-  <label htmlFor="theftPatterns">Have you noticed any patterns or trends in theft incidents?</label>
+<div className="mb-3 text-start">
+  <label htmlFor="theftPatterns" className="form-label mt-3 mb-3">Have you noticed any patterns or trends in theft incidents?</label>
   <textarea
     id="theftPatterns"
-    rows={3}
+    rows={5}
     value={formState.theftPatterns}
     onChange={(e) => setInput("theftPatterns", e.target.value)}
     placeholder="Enter theft patterns or trends"
@@ -553,11 +678,11 @@ const CustomerDiscoveryComponent: React.FC = () => {
   />
 </div>
 
-<div className="mb-3">
-  <label htmlFor="faceRecognitionEnhancement">21. How could face recognition technology enhance your theft prevention measures?</label>
+<div className="mb-3 text-start">
+  <label htmlFor="faceRecognitionEnhancement" className="form-label mt-3 mb-3">How could face recognition technology enhance your theft prevention measures?</label>
   <textarea
     id="faceRecognitionEnhancement"
-    rows={3}
+    rows={5}
     value={formState.faceRecognitionEnhancement}
     onChange={(e) => setInput("faceRecognitionEnhancement", e.target.value)}
     placeholder="Enter feedback on face recognition"
@@ -565,11 +690,11 @@ const CustomerDiscoveryComponent: React.FC = () => {
   />
 </div>
 
-          <div className="mb-3">
+          <div className="mb-3 text-start">
             <label htmlFor="additionalFeedback">Share any other feedback here.</label>
-            <input
+            <textarea
               id="additionalFeedback"
-              type="text"
+              rows={5}
               value={formState.additionalFeedback}
               onChange={(e) => setInput("additionalFeedback", e.target.value)}
               placeholder="Enter feedback"
@@ -577,18 +702,7 @@ const CustomerDiscoveryComponent: React.FC = () => {
               
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="balance">Balance</label>
-            <textarea
-              id="balance"
-              rows={3}
-              value={formState.balance}
-              onChange={(e) => setInput("balance", e.target.value)}
-              placeholder="Enter balance"
-              className="form-control"
-            
-            />
-          </div>
+
           <button
             type="submit"
             className="btn btn-primary"
