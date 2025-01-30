@@ -3,10 +3,10 @@
 const config =  {
   API: {
       GraphQL: {
-        endpoint: 'https://fm5ocqeqzzgczjn5x4semdibui.appsync-api.us-east-1.amazonaws.com/graphql',
+        endpoint: 'https://sy5uoplod5fktftwuu7w744smu.appsync-api.us-east-1.amazonaws.com/graphql',
         region: 'us-east-1',
         defaultAuthMode: 'apiKey',
-        apiKey: 'da2-s5j6wqqeobgsxd7ajjaioyraqy'
+        apiKey: 'da2-nm7qzbfopnfbjfxogmpyn7d7ue'
       }
   }
 };

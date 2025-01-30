@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { generateClient } from "aws-amplify/api";
-import {createCustomerDiscoveryModel} from "../../graphql/mutations";
+import {createCustomerDiscovery} from "../../graphql/mutations";
 
 const client = generateClient(); // AppSync client for Gen2
 const CustomerDiscoveryComponent: React.FC = () => {
@@ -78,19 +78,12 @@ const CustomerDiscoveryComponent: React.FC = () => {
       faceRecognitionEnhancement: formState.faceRecognitionEnhancement
 
       };
-    
-      console.log("Submitting input:", JSON.stringify(input, null, 2));
 
-      console.log("Type of monthlyLossFromTheft:", typeof input.monthlyLossFromTheft);
-      console.log("Type of monthlySecuritySpend:", typeof input.monthlySecuritySpend);
-
-      const result = await client.graphql({
-        query: createCustomerDiscoveryModel  ,
+      await client.graphql({
+        query: createCustomerDiscovery  ,
         variables: { input },
       });
-      
-      console.log('Mutation result:', result);
-     
+        
 
       setFormState({
         email: "",

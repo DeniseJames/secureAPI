@@ -20,7 +20,6 @@ const CustomerDiscoverySurvey = React.lazy(() => import('../src/components/Custo
 function App() {
   return (
     <Authenticator.Provider>
-
         <NavbarComponent />
         <div className="container-fluid"> {/* Use Bootstrap container */}
           <Suspense fallback={<div>Loading...</div>}>
